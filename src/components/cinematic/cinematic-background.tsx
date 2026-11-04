@@ -29,7 +29,7 @@ const DUST: Array<{
  */
 export function CinematicBackground() {
   return (
-    <div aria-hidden="true">
+    <div aria-hidden="true" className="loader-bg-stack">
       <div className="loader-bg-layer loader-spot" />
       <div className="loader-bg-layer loader-beam" />
       {DUST.map((d, i) => (

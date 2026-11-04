@@ -287,16 +287,23 @@
   border-radius: 2px;
 }
 
+.loader-bg-stack {
+  position: absolute;
+  inset: 0;
+}
+
 .loader-center {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  inset: 0;
   padding: 1rem;
   text-align: center;
 }
 
 .loader-logo {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 3.25rem);
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -377,13 +384,17 @@
 }
 
 .loader-progress {
-  margin-top: 2.75rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
   width: min(340px, 72vw);
-  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+  transform: translate(-50%, -50%);
+  animation: rise-in-center 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
 }
 
 .loader-progress-label {
@@ -663,6 +674,18 @@ html.elc-revealed .reveal-item {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Centered variant for the progress block, which is pinned at 50%/50%. */
+@keyframes rise-in-center {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 16px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
 }
 
