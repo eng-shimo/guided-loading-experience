@@ -2,16 +2,16 @@
  * Pure pacing math for the cinematic loader progress.
  * Kept framework-free so it can be unit tested directly.
  *
- * The timeline is tuned so a first visit spends at most ~1.6s in the intro
- * and ~0.95s in the exit — a premium reveal, not a wait. The loader still
+ * The timeline is tuned so a first visit spends at most ~1.2s in the intro
+ * and ~0.78s in the exit — a premium reveal, not a wait. The loader still
  * never claims readiness before the app is actually ready.
  */
 
 /** Minimum time the intro stays on screen (presentation floor, not a fake wait). */
-export const INTRO_MIN_MS = 1600;
+export const INTRO_MIN_MS = 1150;
 
 /** Returning visitors already saw the reveal this session — keep it brief. */
-export const RETURN_MIN_MS = 800;
+export const RETURN_MIN_MS = 550;
 
 /** Reduced-motion floor: a short, calm fade. */
 export const REDUCED_MIN_MS = 400;
@@ -23,7 +23,7 @@ export const INTRO_MAX_MS = 8000;
 export const HERO_READY_TIMEOUT_MS = 4000;
 
 /** Exit transition length — must cover the longest exit animation in styles.css. */
-export const EXIT_MS = 950;
+export const EXIT_MS = 780;
 export const EXIT_MS_REDUCED = 350;
 
 /**
