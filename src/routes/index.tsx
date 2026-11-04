@@ -68,7 +68,7 @@ function Index() {
             data-hero
             src={heroAuditorium}
             alt="The red auditorium of ElCinema before the lights go down"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="hero-reveal absolute inset-0 h-full w-full object-cover"
             fetchPriority="high"
             decoding="async"
           />

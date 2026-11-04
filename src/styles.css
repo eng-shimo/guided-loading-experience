@@ -405,6 +405,11 @@
   color: oklch(0.7 0.02 80 / 0.7);
 }
 
+.loader-progress-label::after {
+  content: "";
+  animation: label-dots 1.6s steps(1) infinite;
+}
+
 .loader-progress-row {
   display: flex;
   align-items: baseline;
@@ -419,6 +424,25 @@
   border-radius: 9999px;
   background: oklch(0.95 0.01 85 / 0.12);
   overflow: hidden;
+}
+
+/* Scanning light sweeping the whole track so loading always reads as active. */
+.loader-progress-track::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -2px;
+  bottom: -2px;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.99 0.01 95 / 0.45) 50%,
+    transparent 100%
+  );
+  transform: translateX(-130%);
+  animation: track-shimmer 1.7s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .loader-progress-fill {
@@ -522,13 +546,13 @@
   animation: center-out 0.45s cubic-bezier(0.55, 0, 0.55, 0.2) both;
 }
 .cinematic-loader[data-phase="exiting"] .loader-spot {
-  animation: spot-exit 0.9s ease-out both;
+  animation: spot-exit 0.7s ease-out both;
 }
 .cinematic-loader[data-phase="exiting"] .film-strip-scene {
-  animation: strip-out 0.6s ease-in both;
+  animation: strip-out 0.55s ease-in both;
 }
 .cinematic-loader[data-phase="exiting"] {
-  animation: loader-lift 0.8s cubic-bezier(0.83, 0, 0.17, 1) 0.15s both;
+  animation: loader-lift 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.12s both;
 }
 
 /* ---- Reduced motion: simple elegant fades ---- */
@@ -553,6 +577,21 @@
 html.elc-revealed .reveal-item {
   animation: rise-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* Cinematic settle: the hero photograph eases out of a slight zoom as the
+   overlay dissolves, so the page itself feels like it is coming into focus. */
+html.elc-revealed .hero-reveal {
+  animation: hero-settle 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-settle {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 /* ---- Keyframes (GPU-friendly transforms/opacity only) ---- */
@@ -738,9 +777,45 @@ html.elc-revealed .reveal-item {
   }
 }
 
-@keyframes loader-lift {
+@keyframes track-shimmer {
   to {
-    transform: translateY(-102%);
+    transform: translateX(320%);
+  }
+}
+
+@keyframes label-dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
+
+/* Modern dissolve: the whole scene brightens, scales away and blurs out
+   while the homepage rises beneath it — like a projector fading to white
+   light, not a curtain sliding. */
+@keyframes loader-lift {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.035);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.09);
+    filter: blur(16px);
   }
 }
 
@@ -749,11 +824,16 @@ html.elc-revealed .reveal-item {
     animation-duration: 0.01ms;
     animation-delay: 0ms;
   }
+  html.elc-revealed .hero-reveal {
+    animation: none;
+  }
   .film-strip-track,
   .loader-grain,
   .loader-spot,
   .loader-beam,
-  .loader-dust {
+  .loader-dust,
+  .loader-progress-track::after,
+  .loader-progress-label::after {
     animation: none !important;
   }
 }
