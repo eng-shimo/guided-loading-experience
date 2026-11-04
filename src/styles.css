@@ -628,6 +628,16 @@ html.elc-revealed .reveal-item {
   }
 }
 
+/* Projector-style reel spin: runs after the entrance lands, forever. */
+@keyframes mark-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes sweep {
   to {
     transform: translateX(340%) skewX(-18deg);
