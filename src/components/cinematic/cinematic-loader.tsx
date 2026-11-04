@@ -77,7 +77,6 @@ export function CinematicLoader() {
       const value = computeProgress(elapsed, readyRef.current, minMs.current);
       progress.current?.update(value);
       if (value >= 1) {
-        console.log('[loader] exit at elapsed', elapsed, 'min', minMs.current);
         window.clearInterval(tick);
         beginExit();
       }

@@ -307,7 +307,9 @@
   width: 3rem;
   height: 3rem;
   color: var(--gold);
-  animation: mark-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  animation:
+    mark-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+    mark-spin 16s linear infinite 0.9s;
   filter: drop-shadow(0 0 18px oklch(0.8 0.115 85 / 0.35));
 }
 
@@ -375,7 +377,7 @@
 }
 
 .loader-progress {
-  margin-top: 3.25rem;
+  margin-top: 2.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
